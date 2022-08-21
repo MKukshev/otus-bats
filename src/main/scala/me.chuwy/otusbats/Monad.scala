@@ -19,7 +19,7 @@ object Monad {
 
     override def point[A](a: A): Option[A] = Some(a)
 
-    override def map[A, B](fa: Option[A])(f: A => B): Option[B] = fa.flatMap(a => point(f(a)))
+    override def map[A, B](fa: Option[A])(f: A => B): Option[B] = flatMap(fa)(a => point(f(a)))
 
   }
 
@@ -28,7 +28,7 @@ object Monad {
 
     override def point[A](a: A): List[A] = a :: Nil
 
-    override def map[A, B](fa: List[A])(f: A => B): List[B] = fa.flatMap(a => point(f(a)))
+    override def map[A, B](fa: List[A])(f: A => B): List[B] = flatMap(fa)(a => point(f(a)))
   }
 
   implicit val tryMonad: Monad[Try] = new Monad[Try] {
@@ -36,7 +36,7 @@ object Monad {
 
     override def point[A](a: A): Try[A] = Try(a)
 
-    override def map[A, B](fa: Try[A])(f: A => B): Try[B] = fa.flatMap(a => point(f(a)))
+    override def map[A, B](fa: Try[A])(f: A => B): Try[B] = flatMap(fa)(a => point(f(a)))
   }
 
 

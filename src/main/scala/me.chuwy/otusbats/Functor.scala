@@ -12,6 +12,7 @@ object Functor {
   // * -> *
   def b(a: Int): Int = ???
 
+
   // (* -> *) -> *
   def c(f: Int => Int): Int = ???
 
